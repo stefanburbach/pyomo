@@ -974,9 +974,9 @@ def _generate_standard_repn(expr, idMap=None, compute_values=True, verbose=False
         if val.__class__ in native_numeric_types:
             if val == 0:
                 continue
-        # elif val.is_constant():         # TODO: coverage?
-        #     if value(val) == 0:
-        #         continue
+        elif val.is_constant():         # TODO: coverage?
+            if value(val) == 0:
+                continue
         v.append(idMap[key])
         c.append(ans.linear[key])
     repn.linear_vars = tuple(v)
@@ -990,9 +990,9 @@ def _generate_standard_repn(expr, idMap=None, compute_values=True, verbose=False
             if val.__class__ in native_numeric_types:
                 if val == 0:            # TODO: coverage?
                     continue
-            # elif val.is_constant():     # TODO: coverage? 
-            #     if value(val) == 0:
-            #         continue
+            elif val.is_constant():     # TODO: coverage?
+                if value(val) == 0:
+                    continue
             repn.quadratic_vars.append( (idMap[key[0]],idMap[key[1]]) )
             repn.quadratic_coefs.append( val )
         repn.quadratic_vars = tuple(repn.quadratic_vars)
